@@ -29,7 +29,7 @@ public class Trabalho05 {
 		System.out.println("Programa de Negociações bancárias\n");
 		
 		// for para pegar as dividas e colocar os valores no array
-		for (i = 0; i < 21;i++){
+		for (i = 0; i < 20;i++){
 			System.out.print("Bom dia, qual o valor da sua dívida?\n"
 					+ "R$ ");
 			valores[i] = leia.nextInt();
