@@ -1,3 +1,4 @@
+package aula_01;
 import java.util.*;
 public class FUP {
 
@@ -50,13 +51,6 @@ public class FUP {
 			}
 
 			somaNotas += notas[i];
-			
-			
-			if(maiorNota < notas[i]){
-				maiorNota = notas[i];
-				aluno[i] = alunos;
-			}
-			
 
 		}
 		
@@ -69,6 +63,13 @@ public class FUP {
 			}
 			
 		}
+		// PEGAR MAIOR NOTA
+		for (int test = 0; test < notas.length;test++){
+			if(maiorNota < notas[test]){
+				maiorNota = notas[test];
+			}
+		}
+		// VERIFICAR QUEM TIROU A MAIOR NOTA
 		
 		
 		
