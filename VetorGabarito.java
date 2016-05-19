@@ -1,4 +1,4 @@
-package aula_01;
+package ltp1;
 import java.util.*;
 public class VetorGabarito {
 
@@ -10,22 +10,28 @@ public class VetorGabarito {
 		//char opcoes[] = {'a', 'b', 'c', 'd', 'e'};
 		char sair;
 		
-		String nomeAluno[] = new String[5];
+		String nomeAluno[] = new String[3];
 		char respostaAluno[] = new char[10];
-		String alunosTotal = "";
+		String alunosTotal[] = new String[10];
 		
 		int i, aluno, k, nota = 0, somaNota = 0, zerouBurro = 0, acimaMedia = 0;
 		
 		double media = 0;
-		
-		System.out.println("Bom dia, digite o gabarito da prova");
+		System.out.println("Ambiente do professor inicializado\n");
+		System.out.println("Bom dia, digite o gabarito da prova\n");
 		
 		// Gabarito
 		for(i = 0; i < gabarito.length; i++){
 			System.out.print("Digite a resposta da questão "+ (i+1) + ": ");
 			gabarito[i] = leia.next().charAt(0);
+			while(gabarito[i] != 'a' && gabarito[i] != 'b' && gabarito[i] != 'c' && gabarito[i] != 'd' && gabarito[i] != 'e'){
+				System.out.print("Resposta inválida, digite novamente: ");
+				gabarito[i] = leia.next().charAt(0);
+			}
+		
 		}
-		System.out.println("\nAmbiente do aluno inicializado\n");
+		System.out.println("\n-----------------------------------------------------\n");
+		System.out.println("Ambiente do aluno inicializado\n");
 		
 		//Aluno
 		for (aluno = 0; aluno < nomeAluno.length; aluno++){
@@ -36,6 +42,10 @@ public class VetorGabarito {
 			for(i = 0; i < gabarito.length; i++){
 				System.out.print("Digite a resposta da questão "+ (i+1) + ": ");
 				respostaAluno[i] = leia.next().charAt(0);
+				while(respostaAluno[i] != 'a' && respostaAluno[i] != 'b' && respostaAluno[i] != 'c' && respostaAluno[i] != 'd' && respostaAluno[i] != 'e'){
+					System.out.print("Resposta inválida, digite novamente: ");
+					respostaAluno[i] = leia.next().charAt(0);
+				}
 			}
 			
 			// calculo da nota do aluno
@@ -56,23 +66,30 @@ public class VetorGabarito {
 			}
 			// verificando totais
 			else if (nota == 10){
-				alunosTotal += nomeAluno[aluno]+ " ";
+				alunosTotal[aluno] = nomeAluno[aluno];
 			}
 			
 			System.out.println(nomeAluno[aluno]+ " sua nota é: "+nota);
+			media = (double) somaNota / (aluno + 1);
+			if (nota > media){
+				acimaMedia++;
+			}
+			
+			if (aluno + 1 == nomeAluno.length){
+				System.out.println("\nNumero máximo de entradas, mostrando resultados finais\n");
+				break;
+			}
 			
 			do {
-				
 				System.out.print("Deseja finalizar o programa [S / N]?: ");
 				sair = leia.next().charAt(0);
-				
+				if (sair != 'S' && sair != 'N'){
+					System.out.println("Resposta inválida, digite novamente.");
+					
+				}
 			}while(sair != 'S' && sair != 'N');
 			
 			if (sair == 'S'){
-				media = (double) somaNota / (aluno + 1);
-				if (nota > media){
-					acimaMedia++;
-				}
 				break;
 			}
 			
@@ -80,13 +97,20 @@ public class VetorGabarito {
 		
 		
 		// Resultados finais
-		System.out.println("Soma das notas: " + somaNota);
+		System.out.println("\n\tSoma das notas: " + somaNota);
 		
-		System.out.println("Media das notas: " + media);
+		System.out.println("\tMedia das notas do campus: " + media);
 		
-		System.out.println((double) zerouBurro / (aluno+1) * 100 +"% dos alunos do campus zeraram a prova");
+		System.out.println("\t"+(double) zerouBurro / (aluno+1) * 100 +"% dos alunos do campus zeraram a prova");
 		
-		System.out.println("Pessoas que tiraram total: "+alunosTotal);
+		System.out.println("\tPessoas que tiraram total: ");
+		
+		for (int index = 0; index < alunosTotal.length; index++){
+			if (alunosTotal[index] != null){
+				System.out.println("\t"+alunosTotal[index]);
+			}
+		}
+		leia.close();
 	}
 
 }

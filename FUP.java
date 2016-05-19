@@ -1,4 +1,4 @@
-package aula_01;
+package ltp1;
 import java.util.*;
 public class FUP {
 
