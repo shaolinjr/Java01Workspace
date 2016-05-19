@@ -10,9 +10,9 @@ public class VetorGabarito {
 		//char opcoes[] = {'a', 'b', 'c', 'd', 'e'};
 		char sair;
 		
-		String nomeAluno[] = new String[3];
-		char respostaAluno[] = new char[10];
-		String alunosTotal[] = new String[10];
+		String nomeAluno[] = new String[4500];
+		char respostaAluno[] = new char[4500];
+		String alunosTotal[] = new String[4500];
 		
 		int i, aluno, k, nota = 0, somaNota = 0, zerouBurro = 0, acimaMedia = 0;
 		
