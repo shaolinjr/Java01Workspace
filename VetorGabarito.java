@@ -11,7 +11,7 @@ public class VetorGabarito {
 		char sair;
 		
 		String nomeAluno[] = new String[4500];
-		char respostaAluno[] = new char[4500];
+		char respostaAluno[] = new char[10];
 		String alunosTotal[] = new String[4500];
 		
 		int i, aluno, k, nota = 0, somaNota = 0, zerouBurro = 0, acimaMedia = 0;
