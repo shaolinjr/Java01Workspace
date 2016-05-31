@@ -22,12 +22,14 @@ public class AutoInstrucional {
 		int diagonalPrinc = 1;
 		int diagonalSec = 1;
 		
+		// matriz de cofatores de C 
+		int cofatores [][] = new int[3][3];
 		
-		// matriz codificada (M x C)
-		int codigo 		[][] = new int[3][3];
+		// matriz mensagem ( M )
+		int mensagem 		[][] = new int[3][3];
 		
-		// matriz código ( M )
-		int mensagem 	[][] = new int[3][3];
+		// matriz codificada ( M x C )
+		int mensagemCodificada 	[][] = new int[3][3];
 		String mensagemStringArray [];
 		int mensagemToNumbersArray [] = new int[9];
 		
@@ -38,7 +40,7 @@ public class AutoInstrucional {
 		char alfabeto	[] 		= {'#','A','B','C','D','E','F','G','H','I','J',
 								'K','L','M','N','O','P','Q','R','S',
 								'T','U','V','W','X','Y','Z'};
-		int i = 0;
+		int i = 0, line, column;
 		// Entrada de dados
 		
 		// Entrada do código
@@ -58,14 +60,14 @@ public class AutoInstrucional {
 			mensagemToNumbersArray[j] = Integer.parseInt(mensagemStringArray[j]);
 		}
 		
-		// criamos a matriz codigo ( M )	
+		// criamos a matriz codificada ( M x C )	
 		
 		// linha
-		for (int line = 0; line < 3; line++){
+		for (line = 0; line < 3; line++){
 			//coluna
-			for(int column = 0; column < 3; column++){
+			for(column = 0; column < 3; column++){
 				
-				mensagem[line][column] = mensagemToNumbersArray[i];
+				mensagemCodificada[line][column] = mensagemToNumbersArray[i];
 				i++;
 
 			}
@@ -91,32 +93,32 @@ public class AutoInstrucional {
 		// redeclaramos o i para resetar o contador do indice do array de chaves
 		i = 0;
 		// linha
-		for (int line = 0; line < 3; line++){
+		for (line = 0; line < 3; line++){
 			//coluna
-			for(int column = 0; column < 3; column++){
+			for(column = 0; column < 3; column++){
 				
 				chave[line][column] = chaveToNumbersArray[i];
+				
 				i++;
 			}
 		}
 		
 		
 		// Matriz ( M x C )
+		// GUARDAR CODIGO PARA MULTIPLICAÇAO CASO FOR NECESSARIA DEPOIS, MAS JA DIGITAMOS A MENSAGEM CODIFICADA NO INICIO DO PROGRAMA
+		// POR ISSO N É PRECISO MULTIPLICAR
 		// Nesse ponto já temos a matriz de mensagem e de chave criadas, agora temos que multiplicar linha x coluna
 		
 		// linha
-		for (int line = 0; line < 3; line++){
-			//coluna
-			for (int column = 0; column < 3; column++){
-				// realizando as multiplicações de linha x coluna
-				for (int t = 0; t < 3; t++){
-					codigo[line][column] += (mensagem[line][t]*chave[t][column]);
-				}
-			}
-		}
-				
-		
-		System.out.println("Decriptografando...");
+//		for (int line = 0; line < 3; line++){
+//			//coluna
+//			for (int column = 0; column < 3; column++){
+//				// realizando as multiplicações de linha x coluna
+//				for (int t = 0; t < 3; t++){
+//					codigo[line][column] += (mensagemCodificada[line][t]*chave[t][column]);
+//				}
+//			}
+//		}
 		
 		
 		// calculando o determinante
@@ -135,19 +137,18 @@ public class AutoInstrucional {
 		System.out.println("Diagonal Sec: "		+ diagonalSec);
 		System.out.println("Determinante: "		+determinante);
 		
+		// Verificar det != 0 para que seja possível qualquer a matriz inversa da chave
 		
-				for(int testing : codigo[0]){
-					System.out.println("Linha 01 "+ testing);
-				}
-				
-				for(int testing : codigo[1]){
-					System.out.println("Linha 02 "+ testing);
-				}
-				
-				for(int testing : codigo[2]){
-					System.out.println("Linha 03 "+ testing);
-				}
-				
+		if (determinante == 0){
+			System.out.println("Determinante de Matriz Chave = 0, chave inválida");
+			// o que fazer depois?
+			// teoricamente deveríamos parar o programa, ou então perguntar se o usuário deseja digitar uma nova chave..
+		}
+		
+		// calcular matriz de cofatores de C
+		// Funcionamento matematico
+		/*	a[0][0] ^-1 = a[1][1]*a[2][2] - a[1][2] * a[2][1]
+		 * */
 		
 			
 		
