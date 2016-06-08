@@ -1,13 +1,31 @@
-package ltp1;
+package aula_01;
 import java.util.*;
 public class AutoInstrucional {
-
+	
+	/* Integrantes: 
+	
+			- Arthur de Castro L. Pires
+			- Bruno Piron
+			- Fabrício Vidal
+			- Jean Augusto
+			- João Paulo Theodoro de Moraes
+		
+			- SALA: 1DA
+	*/
+	
 	public static void main(String[] args) {
 		Scanner leia = new Scanner(System.in);
 		// Formula para decifrar: M = (M x C) x C^-1
 		
 		// codigo de teste: 29 49 -66 49 91 -122 25 31 -55
 		// chave de teste: -1 -2 3 2 3 -5 2 4 -5
+		
+		// codigo de teste 15 -10 18 108 29 34 15 5 4
+		// chave de teste  5 2 1 0 -1 1 2 0 1
+		
+		// codigo de teste 26 59 6 26 -5 23 35 42 16
+		
+		// chave de teste 1 -1 1 1 3 0 1 0 1
 		
 		// chave para decifrar a mensagem ( C )
 		// usuario deve digitar a chave
@@ -37,7 +55,7 @@ public class AutoInstrucional {
 		char alfabeto	[] 		= {	'#','A','B','C','D','E','F','G','H','I','J',
 									'K','L','M','N','O','P','Q','R','S',
 									'T','U','V','W','X','Y','Z'	};
-		int i = 0, line, column;
+		int i = 0, t, line, column;
 		
 		// ENTRADA DE DADOS
 		
@@ -104,27 +122,40 @@ public class AutoInstrucional {
 		else {
 			
 			// calculando os cofatores e transpondo ao mesmo tempo
-			cofatores[0][0] = chave[1][1] * chave[2][2] - chave[1][2] * chave[2][1];
-			cofatores[1][0] = -(chave[1][0] * chave[2][2] - chave[1][2] * chave[2][0]);
-			cofatores[2][0] = chave[1][0] * chave[2][1] - chave[1][1] * chave[2][0];
+			cofatores[0][0] = ((chave[1][1] * chave[2][2]) - (chave[1][2] * chave [2][1])) / determinante ;
+			cofatores[1][0] = -1*((chave[1][0]* chave[2][2]) - (chave[1][2] * chave [2][0])) / determinante;
+			cofatores[2][0] = ((chave[1][0]* chave[2][1]) - (chave[1][1] * chave [2][0])) / determinante;
 			
-			cofatores[0][1] = -(chave[0][1] * chave[2][2] - chave[0][2] * chave[2][1]);
-			cofatores[1][1] = chave[0][0] * chave[2][2] - chave[0][2] * chave[2][0];
-			cofatores[2][1] = -(chave[0][0] * chave[2][1] - chave[0][1] * chave[2][0]);
 			
-			cofatores[0][2] = chave[0][1] * chave[1][2] - chave[0][2] * chave[1][1];
-			cofatores[1][2] = -(chave[0][0] * chave[1][2] - chave[0][2] * chave[1][0]);
-			cofatores[2][2] = chave[0][0] * chave[1][1] - chave[0][1] * chave[2][0];
+			cofatores[0][1] = -1* ((chave[0][1]* chave[2][2]) - (chave[0][2] * chave [2][1])) / determinante;
+			cofatores[1][1] = ((chave[0][0]* chave[2][2]) - (chave[0][2] * chave [2][0])) / determinante;
+			cofatores[2][1] = -1* ((chave[0][0]* chave[2][1]) - (chave[0][1] * chave [2][0])) / determinante;
 			
-			// for para 
+			cofatores[0][2] = ((chave[0][1]* chave[1][2]) - (chave[0][2] * chave [1][1])) / determinante;
+			cofatores[1][2] = -1* ((chave[0][0]* chave[1][2]) - (chave[0][2] * chave [1][0])) / determinante;
+			cofatores[2][2] = ((chave[0][0]* chave[1][1]) - (chave[0][1] * chave [1][0])) / determinante;
+			
+//		for (line = 0; line < 3; line++){
+//						
+//			//coluna
+//			for(column = 0; column < 3; column++){
+//				
+//				if (line != column){
+//					double aux = cofatores[line][column];
+//					cofatores[line][column] = cofatores [column][line];
+//					cofatores [column][line] = aux;
+//					
+//				}
+//			}
+//		}
+			
 			for (line = 0; line < 3; line++){
 				
 				//coluna
 				for(column = 0; column < 3; column++){
 					
-					cofatores[line][column] = ((double) 1 / determinante) * cofatores[line][column];
 					//multiplicacao da matriz de cofatores transposta pela matriz codificada
-					for (int t = 0; t < 3; t++){
+					for (t = 0; t < 3; t++){
 						mensagem[line][column] += (mensagemCodificada[line][t] * cofatores[t][column]);
 					}
 //					System.out.println((line + 1)+" "+(column + 1)+ ": "+mensagem[line][column]);						
